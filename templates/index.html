@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Background Remover</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-black min-h-screen flex flex-col items-center justify-center py-10">
+  <div class="bg-zinc-900 shadow-xl rounded-xl p-8 max-w-lg w-full border border-zinc-700">
+    <h1 class="text-3xl font-bold text-center mb-6 text-white">Background Remover</h1>
+    
+    <form method="POST" enctype="multipart/form-data" class="flex flex-col space-y-4">
+      <input 
+        type="file" name="image" 
+        class="block w-full text-sm text-gray-300 file:mr-4 file:py-2 file:px-4
+               file:rounded-full file:border-0
+               file:text-sm file:font-semibold
+               file:bg-violet-500 file:text-white
+               hover:file:bg-violet-600"
+        required
+      >
+      <button type="submit" class="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700">
+        Upload & Remove Background
+      </button>
+    </form>
+
+    {% if output_image %}
+    <div class="mt-8 text-center">
+      <h2 class="text-xl font-semibold text-gray-200 mb-4">Result</h2>
+      <img 
+        src="{{ url_for('static', filename='output/' + output_image) }}" 
+        alt="Output Image"
+        class="mx-auto rounded shadow-2xl max-h-96 object-contain bg-white"
+      >
+      <a 
+        href="{{ url_for('static', filename='output/' + output_image) }}" 
+        download
+        class="mt-4 inline-block bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+      >
+        Download Image
+      </a>
+    </div>
+    {% endif %}
+  </div>
+</body>
+</html>
